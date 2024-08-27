@@ -18,24 +18,23 @@ function generateItems(count: number) {
   }));
 }
 
-const items = generateItems(40);
+const items = generateItems(50);
 </script>
 
 <template>
-  <div class="container">
-    <div class="center"></div>
-    <div class="right">
-      <v-navigation-drawer permanent width="389" location="right">
-        <div
+  <div class="container" style="display: grid; grid-template-columns: 2fr 1fr;">
+    <div class="center" style="order: 1;"></div>
+    <div class="right" style="order: 2;">
+      <div
           class="shopping-list"
-          style="display: flex; flex-direction: column; height: 100vh"
+          style="display: flex; flex-direction: column; justify-content: space-between; height: 100vh"
         >
           <div
             class="shopping-list__content"
             style="
-              height: 90%;
               padding: 40px 40px 0 40px;
               border: 1px solid black;
+              height: 100%;
             "
           >
             <div
@@ -64,7 +63,7 @@ const items = generateItems(40);
             </div>
             <div
               class="lists__container"
-              style="height: 100%; overflow-y: auto"
+              style="min-height:70px; height: 60vh; max-height: 700px; overflow-y: auto;"
             >
               <div class="list__title">
                 <p>Fruit and vegetables</p>
@@ -95,7 +94,6 @@ const items = generateItems(40);
             </div>
           </div>
         </div>
-      </v-navigation-drawer>
     </div>
   </div>
 </template>
