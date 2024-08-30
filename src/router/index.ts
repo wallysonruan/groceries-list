@@ -6,14 +6,24 @@
 
 // Composables
 import { createRouter, createWebHistory } from "vue-router/auto";
-import index from "@/pages/index.vue";
+import Catalog from "@/pages/Catalog.vue";
+import History from "@/pages/History.vue";
+import Statistics from "@/pages/Statistics.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      component: index,
+      component: Catalog,
+    },
+    {
+      path: "/history",
+      component: History,
+    },
+    {
+      path: "/statistics",
+      component: Statistics,
     },
   ],
 });

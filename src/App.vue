@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { RouterLink } from "vue-router";
+
 function generateItems(count: number) {
   const itemNames = [
     "Apples",
@@ -27,18 +29,20 @@ const items = generateItems(50);
       <button>User Profile</button>
       <ul>
         <li>
-          <button>Items</button>
+          <RouterLink to="/">Items</RouterLink>
         </li>
         <li>
-          <button>History</button>
+          <RouterLink to="/history">History</RouterLink>
         </li>
         <li>
-          <button>Stastistics</button>
+          <RouterLink to="/statistics">Statistics</RouterLink>
         </li>
       </ul>
       <button>Cart</button>
     </div>
-    <router-view />
+    <div class="center">
+      <router-view />
+    </div>
     <div
       class="shopping-list"
       style="
@@ -147,4 +151,10 @@ ul {
     border: 1px solid black;
   }
 }
+
+// @media (max-width: 768px) {
+//   .center {
+//     display: none;
+//   }
+// }
 </style>
