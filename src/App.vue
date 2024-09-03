@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { RouterLink } from "vue-router";
+import NavBar from "./components/NavBar.vue";
 
 function generateItems(count: number) {
   const itemNames = [
@@ -25,21 +25,7 @@ const items = generateItems(50);
 
 <template>
   <div class="app-container">
-    <div class="navbar">
-      <button>User Profile</button>
-      <ul>
-        <li>
-          <RouterLink to="/">Items</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/history">History</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/statistics">Statistics</RouterLink>
-        </li>
-      </ul>
-      <button>Cart</button>
-    </div>
+    <NavBar />
     <div class="center">
       <router-view />
     </div>
@@ -119,23 +105,6 @@ const items = generateItems(50);
   overflow: hidden;
   padding: 0%;
   margin: 0%;
-  background-color: blue;
-}
-
-.navbar {
-  height: 100vh;
-  padding: 3rem 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-ul {
-  li {
-    &:not(:last-child) {
-      margin-bottom: 1.5rem;
-    }
-  }
 }
 
 .item {
@@ -151,10 +120,4 @@ ul {
     border: 1px solid black;
   }
 }
-
-// @media (max-width: 768px) {
-//   .center {
-//     display: none;
-//   }
-// }
 </style>

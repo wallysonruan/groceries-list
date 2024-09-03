@@ -1,7 +1,6 @@
 <template>
   <div class="statistics-container" style="padding: 2rem">
-    <div class="head">
-    </div>
+    <div class="head"></div>
   </div>
 </template>
 
