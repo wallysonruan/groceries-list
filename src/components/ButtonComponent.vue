@@ -13,11 +13,11 @@ defineProps<ButtonProps>();
 </script>
 <template>
   <div class="btn__container">
-    <button class="btn__item btn__regular" v-if="!to">
+    <button v-if="!to" class="btn__item btn__regular">
       <img :src="iconSvg" :alt="iconAlt" v-if="iconSvg" />
       <span class="btn__text" v-if="text">{{ text }}</span>
     </button>
-    <RouterLink :to="to" class="btn__item btn__router-link" v-else>
+    <RouterLink v-else :to="to" class="btn__item btn__router-link">
       <img :src="iconSvg" :alt="iconAlt" v-if="iconSvg" />
       <span class="btn__text" v-if="text">
         {{ text }}
@@ -32,11 +32,17 @@ img {
   height: 1.5rem;
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 .btn__container {
   width: 100%;
+  position: relative;
 
   .btn__item {
-    position: relative;
     width: 100%;
     height: 3rem;
     display: flex;
