@@ -32,12 +32,6 @@ img {
   height: 1.5rem;
 }
 
-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
 .btn__container {
   width: 100%;
   position: relative;
