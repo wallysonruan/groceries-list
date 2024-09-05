@@ -1,9 +1,11 @@
 <script lang="ts" setup>
+import { toCapitalCaseExceptAnd } from "@/utils/string.ts";
+
 const categories = [
   {
-    category: "fruits",
+    category: "fruits and vegetables",
     items: [
-      "Apples",
+      "Pre-cooked corn 450g",
       "Bananas",
       "Oranges",
       "Grapes",
@@ -53,7 +55,7 @@ const categories = [
   <div class="catalog-container">
     <div class="head">
       <h1>
-        Shoppingify allows you to take your <br />
+        <span>Shoppingify</span> allows you to take your <br />
         shopping list wherever you go
       </h1>
       <input type="text" />
@@ -64,12 +66,20 @@ const categories = [
         :key="index"
         style="margin-bottom: 2rem"
       >
-        <h2>{{ category.category }}</h2>
+        <h2>{{ toCapitalCaseExceptAnd(category.category) }}</h2>
         <div>
           <ul style="display: flex; flex-wrap: wrap; row-gap: 2rem">
-            <li v-for="(item, index) in category.items" :key="index">
-              <input type="checkbox" />
-              <label>{{ item }}</label>
+            <li
+              v-for="(item, index) in category.items"
+              :key="index"
+              class="catalog__item"
+            >
+              <label :for="`${category.category}-item-${index}`"
+                >{{ item
+                }}<input
+                  :id="`${category.category}-item-${index}`"
+                  type="checkbox"
+              /></label>
             </li>
           </ul>
         </div>
@@ -80,13 +90,67 @@ const categories = [
 
 <style scoped lang="scss">
 .catalog-container {
-  background-color: red;
+  background-color: #fafafe;
   height: 100vh;
   overflow-y: scroll;
+  padding: 2rem 4rem;
 
   .head {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-bottom: 3rem;
+
+    span {
+      color: #f9a109;
+    }
+  }
+
+  .catalog {
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .catalog__item {
+      width: 9rem;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.05);
+
+      &:not(:last-of-type) {
+        margin-right: 1rem;
+      }
+
+      label {
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        word-wrap: break-word;
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+      }
+
+      input[type="checkbox"] {
+        position: relative;
+        appearance: none;
+        -webkit-appearance: none;
+        width: 1rem;
+        height: 1rem;
+
+        &::before {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          content: url("@/assets/icons/plus.svg");
+        }
+        &:checked::before {
+          content: url("@/assets/icons/remove-or-close.svg");
+        }
+      }
+    }
   }
 }
 </style>

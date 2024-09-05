@@ -2,10 +2,7 @@
 import NavBar from "./components/NavBar.vue";
 import ButtonComponent from "./components/ButtonComponent.vue";
 import Pencil from "@/assets/icons/pencil.svg";
-
-function toCapitalCase(str: string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+import { toCapitalCase } from "@/utils/string.ts";
 
 function generateRandomQuantity() {
   return Math.floor(Math.random() * 100) + 1; // Random quantity between 1 and 100 units
@@ -105,7 +102,6 @@ const categories = [
         class="shopping-list__content"
         style="
           padding: 40px 40px 0 40px;
-          border: 1px solid black;
           background-color: #fff0de;
           height: 100%;
         "
@@ -222,7 +218,7 @@ const categories = [
               background-color: #f9a109;
               color: white;
               border-color: transparent;
-              border-radius: 0 10px 10px 0;
+              border-radius: 10px;
               height: 100%;
               padding: 0.5rem;
             "
