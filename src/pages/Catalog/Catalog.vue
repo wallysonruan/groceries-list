@@ -1,54 +1,12 @@
 <script lang="ts" setup>
 import { toCapitalCaseExceptAnd } from "@/utils/string.ts";
+import CatalogModel from "./model";
 
-const categories = [
-  {
-    category: "fruits and vegetables",
-    items: [
-      "Pre-cooked corn 450g",
-      "Bananas",
-      "Oranges",
-      "Grapes",
-      "Mangos",
-      "Pineapples",
-      "Strawberries",
-      "Blueberries",
-      "Raspberries",
-      "Blackberries",
-    ],
-  },
-  {
-    category: "vegetables",
-    items: [
-      "Carrots",
-      "Broccoli",
-      "Spinach",
-      "Tomatoes",
-      "Cucumbers",
-      "Peppers",
-      "Lettuce",
-      "Onions",
-      "Garlic",
-      "Potatoes",
-    ],
-  },
-  {
-    category: "meat",
-    items: ["Chicken", "Beef", "Pork", "Lamb", "Turkey"],
-  },
-  {
-    category: "fish",
-    items: ["Salmon", "Tuna", "Cod", "Trout", "Sardines"],
-  },
-  {
-    category: "beverages",
-    items: ["Water", "Juice", "Soda", "Tea", "Coffee"],
-  },
-  {
-    category: "pet",
-    items: ["Dog Food", "Cat Food", "Bird Seed", "Fish Food", "Pet Toys"],
-  },
-];
+type CatalogProp = {
+  model: CatalogModel;
+};
+
+const { model } = defineProps<CatalogProp>();
 </script>
 
 <template>
@@ -64,11 +22,11 @@ const categories = [
     </div>
     <div class="catalog">
       <section
-        v-for="(category, index) in categories"
+        v-for="(category, index) in model.categories"
         :key="index"
         style="margin-bottom: 2rem"
       >
-        <h2>{{ toCapitalCaseExceptAnd(category.category) }}</h2>
+        <h2>{{ toCapitalCaseExceptAnd(category.name) }}</h2>
         <div>
           <ul style="display: flex; flex-wrap: wrap; row-gap: 2rem">
             <li
@@ -76,11 +34,9 @@ const categories = [
               :key="index"
               class="catalog__item"
             >
-              <label :for="`${category.category}-item-${index}`"
+              <label :for="`${category.name}-item-${index}`"
                 >{{ item
-                }}<input
-                  :id="`${category.category}-item-${index}`"
-                  type="checkbox"
+                }}<input :id="`${category.name}-item-${index}`" type="checkbox"
               /></label>
             </li>
           </ul>
@@ -116,7 +72,7 @@ const categories = [
 
       &::before {
         position: absolute;
-        content: url("../assets/icons/magnifier.svg");
+        content: url("@/assets/icons/magnifier.svg");
         top: 50%;
         left: 10px;
         transform: translate(0%, -50%);
@@ -145,6 +101,7 @@ const categories = [
 
     .catalog__item {
       width: 9rem;
+      height: min-content;
       background-color: white;
       border-radius: 12px;
       box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.05);

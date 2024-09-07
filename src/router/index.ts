@@ -6,7 +6,8 @@
 
 // Composables
 import { createRouter, createWebHistory } from "vue-router/auto";
-import Catalog from "@/pages/Catalog.vue";
+import Catalog from "@/pages/Catalog/Catalog.vue";
+import CatalogModel from "@/pages/Catalog/model";
 import History from "@/pages/History.vue";
 import Statistics from "@/pages/Statistics.vue";
 
@@ -16,6 +17,9 @@ const router = createRouter({
     {
       path: "/",
       component: Catalog,
+      props: {
+        model: new CatalogModel(),
+      },
     },
     {
       path: "/history",
