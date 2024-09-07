@@ -58,7 +58,9 @@ const categories = [
         <span>Shoppingify</span> allows you to take your <br />
         shopping list wherever you go
       </h1>
-      <input type="text" />
+      <label class="catalog__search" for="search-catalog-item">
+        <input type="text" id="search-catalog-item" placeholder="search item" />
+      </label>
     </div>
     <div class="catalog">
       <section
@@ -103,6 +105,35 @@ const categories = [
     span {
       color: #f9a109;
     }
+
+    .catalog__search {
+      position: relative;
+      padding: 1rem 0 1rem 3rem;
+      background-color: white;
+      height: max-content;
+      border-radius: 12px;
+      cursor: pointer;
+
+      &::before {
+        position: absolute;
+        content: url("../assets/icons/magnifier.svg");
+        top: 50%;
+        left: 10px;
+        transform: translate(0%, -50%);
+      }
+
+      input {
+        border: none;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: #bdbdbd;
+        }
+      }
+    }
   }
 
   .catalog {
@@ -130,6 +161,10 @@ const categories = [
         display: flex;
         align-items: start;
         justify-content: space-between;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       input[type="checkbox"] {
