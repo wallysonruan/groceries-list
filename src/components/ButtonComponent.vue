@@ -33,7 +33,6 @@ img {
 }
 
 .btn__container {
-  width: 100%;
   position: relative;
 
   .btn__item {
