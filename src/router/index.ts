@@ -8,7 +8,8 @@
 import { createRouter, createWebHistory } from "vue-router/auto";
 import Catalog from "@/pages/Catalog/Catalog.vue";
 import CatalogModel from "@/pages/Catalog/model";
-import History from "@/pages/History.vue";
+import History from "@/pages/History/History.vue";
+import HistoryModel from "@/pages/History/model";
 import Statistics from "@/pages/Statistics.vue";
 
 const router = createRouter({
@@ -24,6 +25,9 @@ const router = createRouter({
     {
       path: "/history",
       component: History,
+      props: {
+        model: new HistoryModel(),
+      },
     },
     {
       path: "/statistics",

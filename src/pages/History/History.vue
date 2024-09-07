@@ -2,65 +2,21 @@
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import ChevronRight from "@/assets/icons/chevron-right.svg";
 
-function generateRandomDate(start: Date, end: Date) {
-  return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime()),
-  )
-    .toISOString()
-    .split("T")[0];
-}
+import HistoryModel from "./model";
 
-const listNames = [
-  "Grocery List",
-  "Birthday Grocery List",
-  "Christmas Grocery List",
-  "Thanksgiving Grocery List",
-  "New Year Grocery List",
-  "Easter Grocery List",
-  "Halloween Grocery List",
-  "Party Grocery List",
-  "Weekly Grocery List",
-  "Monthly Grocery List",
-];
+type HistoryProp = {
+  model: HistoryModel;
+};
 
-const statuses = ["completed", "cancelled"];
-
-function generateHistory(maxList: number) {
-  return Array.from(
-    { length: Math.floor(Math.random() * maxList) },
-    (_, i) => ({
-      created_at: generateRandomDate(
-        new Date(2021, 1, 1),
-        new Date(2021, 12, 31),
-      ),
-      name: listNames[Math.floor(Math.random() * listNames.length)],
-      status: statuses[Math.floor(Math.random() * statuses.length)],
-    }),
-  );
-}
-
-const lists = generateHistory(20);
-
-const listsSortedByDate = lists.sort((a, b) => {
-  const aDate = new Date(a.created_at);
-  const bDate = new Date(b.created_at);
-
-  if (aDate < bDate) {
-    return -1;
-  }
-  if (aDate > bDate) {
-    return 1;
-  }
-  return 0;
-});
+const { model } = defineProps<HistoryProp>();
 
 const arrayListsSeparatedByMonth: {
   month: number;
   year: number;
   lists: any[];
-}[] = listsSortedByDate.reduce(
+}[] = model.lists.reduce(
   (acc: { month: number; year: number; lists: any[] }[], list) => {
-    const date = new Date(list.created_at);
+    const date = new Date(list.createdAt);
     const month = date.getMonth() + 1; // getMonth() returns 0-11, so add 1
     const year = date.getFullYear();
 
@@ -104,7 +60,7 @@ function getMonthNameByNumber(monthNumber: number): string {
 </script>
 
 <template>
-  <div class="history-container" style="padding: 2rem">
+  <div class="history-container">
     <div class="head">
       <h1>Shopping history</h1>
     </div>
@@ -123,7 +79,7 @@ function getMonthNameByNumber(monthNumber: number): string {
           <p>{{ list.name }}</p>
           <div class="item__info">
             <p class="info__created-at">
-              {{ list.created_at.split("-").join(".") }}
+              {{ list.createdAt.split("-").join(".") }}
             </p>
             <p class="info__status" :status="list.status">{{ list.status }}</p>
             <ButtonComponent :iconSvg="ChevronRight" />
@@ -186,7 +142,7 @@ function getMonthNameByNumber(monthNumber: number): string {
             position: absolute;
             top: -15%;
             left: 0;
-            content: url("../assets/icons/calendar.svg");
+            content: url("@/assets/icons/calendar.svg");
           }
         }
 
